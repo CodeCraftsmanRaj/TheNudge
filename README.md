@@ -51,7 +51,7 @@ The system employs a modular pipeline architecture, allowing for specialized AI 
 
 This architecture facilitates independent model updates and the integration of diverse data sources for comprehensive agricultural intelligence.
 
-![Forecast Animation](Report_Images/forecast_animation.gif)
+![Forecast Animation](Report_Images/flowchart.png)
 *(Caption: Conceptual animation illustrating the flow of data and prediction over time.)*
 
 ---
@@ -82,6 +82,9 @@ Weather is a fundamental driver of agricultural outcomes. This module focuses on
 *   **Data Requirements:** Key parameters include daily maximum/minimum temperatures, precipitation totals, solar radiation (shortwave), wind speed, and general weather condition codes. Both historical records aligned with price data and future forecasts covering the prediction horizon are necessary.
 *   **Processing:** Data is cleaned, standardized (units, names), and resampled to a consistent daily frequency. Missing values are imputed using appropriate methods (e.g., temporal filling for temperature, statistical defaults for radiation).
 *   **Role in Pipeline:** Provides historical weather as *past covariates* for training time series models and future weather estimates as *future covariates* during the prediction phase. The quality of weather data directly impacts the accuracy of downstream models like price prediction.
+
+![Forecast Animation](Report_Images/forecast_animation.gif)
+*(Caption: Conceptual animation illustrating the flow of data and prediction over time.)*
 
 ### 4.2 Crop Price Prediction using N-BEATS
 
