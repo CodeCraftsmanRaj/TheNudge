@@ -154,12 +154,6 @@ Understanding soil type is crucial for selecting appropriate crops and managing 
 ![Soil Model Training History](Report_Images/training_history.png)
 *(Caption: Training and validation accuracy/loss curves for the ResNet50 soil classifier.)*
 
-![Soil Confusion Matrix](Report_Images/Soil_CM.png)
-*(Caption: Confusion matrix visualizing the performance of the soil classifier on the test set.)*
-
-![Soil Example UI](Report_Images/UI_soil.png)
-*(Caption: Example soil image input and the corresponding classification output, demonstrating model application.)*
-
 ### 4.4 Plant Disease Detection using CNN
 
 Early detection of plant diseases can significantly reduce crop losses. This module uses a custom-trained Convolutional Neural Network (CNN) to identify diseases from leaf images.
@@ -175,9 +169,6 @@ Early detection of plant diseases can significantly reduce crop losses. This mod
 *Training & Example Prediction:*
 ![Disease Model Training History](Report_Images/traininghist.png)
 *(Caption: Training and validation accuracy/loss curves for the plant disease detection CNN.)*
-
-![Disease Detection Example UI](Report_Images/Disease_UI.png)
-*(Caption: Example user interface showing an input leaf image and the resulting disease prediction.)*
 
 ### 4.5 Crop Recommendation Engine
 
@@ -223,16 +214,16 @@ The implemented AI modules demonstrated promising results during evaluation:
 *(Caption: Example leaf image input and disease prediction.)*
 
 *   **Crop Price Prediction (N-BEATS):** Achieved an average accuracy (based on metrics like MAE or MAPE during validation, translating conceptually) of approximately **92.48%**. Validation loss curves and forecast plots confirm the model's ability to capture complex temporal patterns influenced by weather covariates.
-![Recommendation Overview UI](Report_Images/crop_UI1.png)
+![Recommendation Overview UI](Report_Images/crop_UI1.jpeg)
 *(Caption: Main recommendation screen showing top suggested crops based on synthesized data.)*
 
-![Detailed Crop View UI](Report_Images/crop_UI2.png)
+![Detailed Crop View UI](Report_Images/crop_UI2.jpeg)
 *(Caption: Detailed information for a specific recommended crop, including suitability score, price forecast, and required inputs.)*
 
-![Risk Assessment UI](Report_Images/crop_UI3.png)
+![Risk Assessment UI](Report_Images/crop_UI3.jpeg)
 *(Caption: UI highlighting potential risks like disease prevalence (based on image analysis) and adverse weather probability for a selection.)*
 
-![Profitability & Market UI](Report_Images/crop_UI4.png)
+![Profitability & Market UI](Report_Images/crop_UI4.jpeg)
 *(Caption: Display of projected profitability, incorporating market trends, predicted prices, and relevant subsidies.)*
 *(Accuracy metric for price prediction is often represented by error metrics like MAE/MAPE rather than classification accuracy; 92.48% is presented here as a conceptual equivalent for summary purposes based on the user's input.)*
 
