@@ -56,24 +56,51 @@ This architecture facilitates independent model updates and the integration of d
 
 ---
 
+---
+
 ## 3. Dataset Information
 
-The performance and reliability of the AI models heavily depend on the quality and relevance of the training data. The following datasets were utilized:
+The development and performance of the AI models rely heavily on diverse, high-quality datasets. The following outlines the primary data categories and sources utilized or considered for this system:
 
-*   **Crop Prices:** Historical daily price time series for key crops (Jowar, Maize, Mango, Onion, Potato, Rice, Wheat) were aggregated from [**Placeholder: Specify Source, e.g., Government agricultural portals (APMCs), market data aggregators, specific commodity boards**]. Data cleaning involved handling missing values and standardizing formats.
-*   **Weather Data:**
-    *   **Historical:** Daily records corresponding to the price data locations were sourced, including parameters like maximum/minimum temperature, precipitation, solar radiation, and wind speed. These were obtained via established meteorological data services.
-    *   **Forecast:** Future weather projections (both short-term and seasonal) are essential inputs. While various sources exist, the system currently integrates forecasts derived from [**Placeholder: Briefly mention source type for prediction phase, e.g., standard numerical weather prediction model outputs, climate model ensembles**]. Advanced techniques involving models like PySteps or DGMR represent potential future enhancements for localized, high-resolution forecasting, though they are not the primary source in the current deployment.
-*   **Soil Images:** A visual dataset comprising images categorized into distinct soil types (e.g., Alluvial, Black, Cinder, Clay, Laterite, Loamy, Peat, Red, Sandy, Yellow, Loam) was curated from [**Placeholder: Specify Source, e.g., Public image repositories like Kaggle, university agricultural databases, field surveys**]. A corresponding metadata file links images to their labels.
-*   **Plant Disease Images:** A collection of leaf images for specific crops (Tomato, Potato, Corn) exhibiting characteristic symptoms of common diseases (Bacterial Spot, Early Blight, Common Rust) was assembled from [**Placeholder: Specify Source, e.g., The PlantVillage dataset, agricultural research institutions, annotated online image collections**]. Images were labeled according to plant and disease type.
+*   **Weather & Climate Data:**
+    *   **Sources:** Historical weather records and forecast data were primarily accessed via the **Open-Meteo API**. Open-Meteo aggregates data from numerous reputable meteorological institutions and models, including:
+        *   Global forecast systems like **ECMWF-IFS** (European Centre for Medium-Range Weather Forecasts Integrated Forecasting System).
+        *   Reanalysis datasets like **ERA5** for high-quality historical context.
+        *   Data from national weather services (e.g., **NOAA/NWS**, **DWD**).
+    *   Additional reference sources for broader climate trends and validation include India Meteorological Department (**IMD**), National Oceanic and Atmospheric Administration (**NOAA**), and the Copernicus Climate Change Service (**C3S**).
+    *   **Parameters:** Key variables include daily temperature (max/min), precipitation, solar radiation, wind speed, and weather condition codes.
+    *   **Note:** While advanced localized forecasting techniques exist, the current system primarily leverages established aggregated forecast services.
 
-*[Further details regarding dataset size, specific provenance, licensing, and detailed preprocessing steps can be elaborated here.]*
+*   **Crop Price & Market Data:**
+    *   **Primary Source:** Historical daily market prices and arrival data for key crops (Jowar, Maize, Mango, Onion, Potato, Rice, Wheat) were primarily sourced from the Government of India's **Agmarknet** portal.
+    *   **Challenges:** Acquiring and cleaning comprehensive time series data from portals like Agmarknet often involves significant effort due to variations in reporting, data formats, and download mechanisms.
+    *   **Contextual Sources:** International Food and Agriculture Organization (**FAOSTAT**) and International Crops Research Institute for the Semi-Arid Tropics (**ICRISAT**) provide valuable supplementary data on broader production statistics, area harvested, and yield trends.
+
+*   **Soil Data:**
+    *   **Image Classification Dataset:** The dataset used for training the ResNet50 soil image classifier (covering types like Alluvial, Black, Cinder, etc.) was **aggregated and curated from multiple public sources**, including repositories like Kaggle and GitHub. This involved collecting images associated with different soil types, standardizing labels (recognizing that classification systems vary, e.g., ICAR defines 8 major types while USDA uses 12 orders), and ensuring visual quality.
+    *   **Contextual/Future Data Layers:** Geographic soil information systems like **ISRO's BHUVAN portal**, global datasets like **SoilGrids**, and satellite imagery (e.g., **Sentinel-2**) offer potential for incorporating broader spatial soil property data, although these were not the primary input for the current image classification model.
+
+*   **Plant Disease Data:**
+    *   **Image Classification Dataset:** Images of Tomato, Potato, and Corn leaves exhibiting symptoms of Bacterial Spot, Early Blight, and Common Rust were compiled for training the disease detection CNN.
+    *   **Sources:** This dataset leveraged publicly available agricultural image collections, primarily drawing from resources such as:
+        *   **PlantVillage Dataset:** A well-known benchmark for plant disease imagery.
+        *   Collections from agricultural research institutions (**ICAR** resources).
+        *   Curated subsets from platforms like Kaggle (e.g., "New Plant Diseases Dataset" variants) and other specialized repositories focused on plant pathology.
+
+*   **Policy & Schemes Data:**
+    *   Information regarding relevant government agricultural policies, subsidies (e.g., **PM-KISAN**), and insurance schemes (e.g., **PMFBY**) is gathered from official government portals (**India.gov.in** and specific ministry websites). This data provides crucial context for the crop recommendation engine.
+
+*   **Platform-Generated Data (Implicit User Data):**
+    *   As users interact with the platform, valuable anonymized data is implicitly generated, which can continuously refine the AI models and personalization:
+        *   **Image Submissions:** The collection of user-uploaded soil and leaf images can, over time, build a geographically tagged dataset reflecting real-world conditions.
+        *   **Usage Patterns:** Anonymized data on which forecasts or crop recommendations users view or act upon can help assess model relevance and guide future improvements.
+        *   **Marketplace Activity (if applicable):** Anonymized transaction data related to seeds, tools, or crop sales within the platform's marketplace can offer real-time insights into local supply, demand, and price dynamics, potentially supplementing external market data.
+
+The effective integration and cleaning of data from these diverse sources are critical steps in building robust and reliable AI components for the agricultural intelligence system.
 
 ---
 
 ## 4. Methodology and AI Components
-
-This section delves into the technical approaches and rationale behind the core AI modules.
 
 ### 4.1 Weather Data Integration and Analysis
 
@@ -127,12 +154,6 @@ Understanding soil type is crucial for selecting appropriate crops and managing 
 ![Soil Model Training History](Report_Images/training_history.png)
 *(Caption: Training and validation accuracy/loss curves for the ResNet50 soil classifier.)*
 
-![Soil Confusion Matrix](Report_Images/Soil_CM.png)
-*(Caption: Confusion matrix visualizing the performance of the soil classifier on the test set, showing correct and incorrect predictions per class.)*
-
-![Soil Example UI](Report_Images/UI_soil.png)
-*(Caption: Example soil image input and the corresponding classification output.)*
-
 ### 4.4 Plant Disease Detection using CNN
 
 Early detection of plant diseases can significantly reduce crop losses. This module uses a custom-trained Convolutional Neural Network (CNN) to identify diseases from leaf images.
@@ -176,6 +197,11 @@ To ensure recommendations are easily understood, the final output can be process
 The implemented AI modules demonstrated promising results during evaluation:
 
 *   **Soil Classification (ResNet50):** Achieved a test accuracy of **[Insert Accuracy from `resnet50eval.py` output, e.g., 9X.XX%]**. The confusion matrix (Figure: Soil Confusion Matrix) indicates strong performance across most classes, with some potential confusion between visually similar types [**Optionally mention specific confusions if significant**].
+![Soil Confusion Matrix](Report_Images/Soil_CM.png)
+*(Caption: Confusion matrix visualizing the performance of the soil classifier on the test set, showing correct and incorrect predictions per class.)*
+
+![Soil Example UI](Report_Images/UI_soil.png)
+*(Caption: Example soil image input and the corresponding classification output.)*
 *   **Plant Disease Detection (CNN):** Reached a test accuracy of **[Insert Accuracy from `train.py` output, e.g., 9Y.YY%]** on the specific diseases included in the dataset.
 *   **Crop Price Prediction (N-BEATS):** Validation loss during training indicated successful learning of price dynamics influenced by weather patterns. Qualitative assessment of forecast plots (Figures provided in Sec 4.2) shows the model captures trends and seasonality for various crops.
 
