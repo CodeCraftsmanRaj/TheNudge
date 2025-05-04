@@ -212,23 +212,31 @@ To ensure the complex analysis is easily digestible, a final summarization step 
 The implemented AI modules demonstrated promising results during evaluation:
 
 *   **Soil Classification (ResNet50):** Achieved a test accuracy of **94.34%**. The confusion matrix indicates strong performance across most classes, with minor confusion observed between some visually similar soil types.
-*   **Plant Disease Detection (CNN):** Reached a high test accuracy of **99.44%** on the specific diseases included in the dataset, demonstrating effectiveness in identifying trained visual symptoms.
-*   **Crop Price Prediction (N-BEATS):** Achieved an average accuracy (based on metrics like MAE or MAPE during validation, translating conceptually) of approximately **92.48%**. Validation loss curves and forecast plots confirm the model's ability to capture complex temporal patterns influenced by weather covariates.
-
-*(Accuracy metric for price prediction is often represented by error metrics like MAE/MAPE rather than classification accuracy; 92.48% is presented here as a conceptual equivalent for summary purposes based on the user's input.)*
-
-Quantitative evaluation of the end-to-end crop recommendation accuracy is pending the full implementation and testing of the integrated Recommendation Engine module.
-
-*Supporting Visualizations:*
-
 ![Soil Confusion Matrix](Report_Images/Soil_CM.png)
 *(Caption: Confusion matrix for the soil classification model.)*
 
 ![Soil Example UI](Report_Images/UI_soil.png)
 *(Caption: Example soil image input and classification.)*
 
+*   **Plant Disease Detection (CNN):** Reached a high test accuracy of **99.44%** on the specific diseases included in the dataset, demonstrating effectiveness in identifying trained visual symptoms.
 ![Disease Detection Example UI](Report_Images/Disease_UI.png)
 *(Caption: Example leaf image input and disease prediction.)*
+
+*   **Crop Price Prediction (N-BEATS):** Achieved an average accuracy (based on metrics like MAE or MAPE during validation, translating conceptually) of approximately **92.48%**. Validation loss curves and forecast plots confirm the model's ability to capture complex temporal patterns influenced by weather covariates.
+![Recommendation Overview UI](Report_Images/crop_UI1.png)
+*(Caption: Main recommendation screen showing top suggested crops based on synthesized data.)*
+
+![Detailed Crop View UI](Report_Images/crop_UI2.png)
+*(Caption: Detailed information for a specific recommended crop, including suitability score, price forecast, and required inputs.)*
+
+![Risk Assessment UI](Report_Images/crop_UI3.png)
+*(Caption: UI highlighting potential risks like disease prevalence (based on image analysis) and adverse weather probability for a selection.)*
+
+![Profitability & Market UI](Report_Images/crop_UI4.png)
+*(Caption: Display of projected profitability, incorporating market trends, predicted prices, and relevant subsidies.)*
+*(Accuracy metric for price prediction is often represented by error metrics like MAE/MAPE rather than classification accuracy; 92.48% is presented here as a conceptual equivalent for summary purposes based on the user's input.)*
+
+Quantitative evaluation of the end-to-end crop recommendation accuracy is pending the full implementation and testing of the integrated Recommendation Engine module.
 
 ---
 
