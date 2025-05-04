@@ -51,7 +51,7 @@ The system employs a modular pipeline architecture, allowing for specialized AI 
 
 This architecture facilitates independent model updates and the integration of diverse data sources for comprehensive agricultural intelligence.
 
-![Forecast Animation](Report_Images/Editor _ Mermaid Chart-2025-05-04-105656.png)
+![flowchart](Report_Images/flowchart.png)
 *(Caption: Conceptual flow diagram of the AI models)*
 
 ---
