@@ -52,7 +52,7 @@ The system employs a modular pipeline architecture, allowing for specialized AI 
 This architecture facilitates independent model updates and the integration of diverse data sources for comprehensive agricultural intelligence.
 
 ![Forecast Animation](Report_Images/flowchart.png)
-*(Caption: Conceptual animation illustrating the flow of data and prediction over time.)*
+*(Caption: Conceptual flow diagram of the AI models)*
 
 ---
 
