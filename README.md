@@ -101,9 +101,9 @@ Predicting volatile crop prices helps farmers make informed decisions about plan
 *Training & Forecast Examples:*
 | Crop      | Training History Plot                          | Forecast Plot                               |
 | :-------- | :--------------------------------------------- | :------------------------------------------ |
-| Jowar     | ![Jowar Training](Report_Images/Jowar_training_plot.png)   | *(Forecast plot not provided)*            |
-| Maize     | ![Maize Training](Report_Images/Maize_training_plot.png)   | *(Forecast plot not provided)*            |
-| Mango     | ![Mango Training](Report_Images/Mango_training_plot.png)   | *(Forecast plot not provided)*            |
+| Jowar     | ![Jowar Training](Report_Images/Jowar_training_plot.png)   | ![Jowar Forecast](Report_Images/Jowar_forecast_plot_kg.png) |
+| Maize     | ![Maize Training](Report_Images/Maize_training_plot.png)   | ![Maize Forecast](Report_Images/Maize_forecast_plot_kg.png) |
+| Mango     | ![Mango Training](Report_Images/Mango_training_plot.png)   | ![Mango Forecast](Report_Images/Mango_forecast_plot_kg.png) |
 | Onion     | ![Onion Training](Report_Images/Onion_training_plot.png)   | ![Onion Forecast](Report_Images/Onion_forecast_plot_kg.png) |
 | Potato    | ![Potato Training](Report_Images/Potato_training_plot.png) | ![Potato Forecast](Report_Images/Potato_forecast_plot_kg.png)|
 | Rice      | ![Rice Training](Report_Images/Rice_training_plot.png)     | ![Rice Forecast](Report_Images/Rice_forecast_plot_kg.png)   |
