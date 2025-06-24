@@ -1,0 +1,38 @@
+[
+    {
+      "speaker": "User_Alice",
+      "text": "Hello, I'm having trouble with my internet connection.",
+      "timestamp": "2023-10-27T10:00:00Z",
+      "audio_segment_path": "/home/raj_99/Projects/Pragati/piloting/file_example_MP3_2MG.mp3"
+    },
+    {
+      "speaker": "Support_AI_Agent",
+      "text": "Hello Alice! I'm sorry to hear that. Can you tell me what lights are showing on your modem?",
+      "confidence": 0.95,
+      "timestamp": "2023-10-27T10:00:05Z"
+    },
+    {
+      "speaker": "User_Alice",
+      "text": "The power light is green, but the internet light is blinking orange.",
+      "timestamp": "2023-10-27T10:00:15Z",
+      "audio_segment_path": "/home/raj_99/Projects/Pragati/piloting/file_example_MP3_2MG.mp3"
+    },
+    {
+      "speaker": "Support_AI_Agent",
+      "text": "Okay, a blinking orange light usually indicates a problem connecting to our network. Let's try restarting your modem. Can you unplug it from the power for 30 seconds and then plug it back in?",
+      "timestamp": "2023-10-27T10:00:25Z"
+    },
+    {
+      "speaker": "User_Alice",
+      "text": "Alright, doing that now... Okay, it's back on. The light is still blinking orange though.",
+      "timestamp": "2023-10-27T10:01:30Z",
+      "audio_segment_path": "/home/raj_99/Projects/Pragati/piloting/file_example_MP3_2MG.mp3"
+    },
+    {
+      "speaker": "Support_AI_Agent",
+      "text": "Hmm, that's not ideal. Let me check for any outages in your area. What's your zip code?",
+      "timestamp": "2023-10-27T10:01:40Z",
+      "is_flagged": true,
+      "flag_notes": "LLM should have asked for account ID or address first for better accuracy before zip code for outage check."
+    }
+  ]
