@@ -1,13 +1,19 @@
+export type FunctionName = 'Function1' | 'Function2' | 'Function3';
+export type FunctionOption = FunctionName | 'None';
+
 export interface ConversationTurn {
   id: string;
   speaker: 'kisaanverse' | 'alice';
   text: string;
   timestamp?: string;
-  isFlagged: boolean;
-  flagNote: string;
   originalText: string;
-  audioUrl?: string; // Individual audio file for each KisaanVerse response
-  audioTimestamp?: string; // For audio sync
+  audioUrl?: string; 
+  audioTimestamp?: string;
+
+  // New system for annotation
+  isFunctionCallWrong: boolean; // Main toggle for showing details
+  functionsCalled: FunctionOption[];
+  correctFunctions: FunctionOption[];
 }
 
 export interface ConversationData {

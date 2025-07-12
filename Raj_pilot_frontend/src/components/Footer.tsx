@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Download, Save, AlertCircle, CheckCircle } from 'lucide-react';
 import { useConversationStore } from '../store/conversationStore';
 
 const Footer: React.FC = () => {
-  const { markSaved } = useConversationStore();
-  const activeProject = useConversationStore(state => state.activeProjectId ? state.projects[state.activeProjectId] : null);
+  // Optimized state selection from the store
+  const { activeProject, markSaved } = useConversationStore(state => ({
+    activeProject: state.activeProjectId ? state.projects[state.activeProjectId] : null,
+    markSaved: state.markSaved,
+  }));
   
   const conversation = activeProject?.data;
   const hasUnsavedChanges = activeProject?.hasUnsavedChanges;
@@ -12,7 +15,8 @@ const Footer: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<string>('');
 
-  const handleSaveAndDownload = async () => {
+  // Memoize the handler function to prevent re-creation on every render
+  const handleSaveAndDownload = useCallback(async () => {
     if (!conversation) return;
 
     setIsSaving(true);
@@ -40,21 +44,23 @@ const Footer: React.FC = () => {
       setSaveStatus('Conversation saved and downloaded!');
       setTimeout(() => setSaveStatus(''), 3000);
     } catch (error) {
+      console.error("Save failed:", error);
       setSaveStatus('Failed to save conversation');
       setTimeout(() => setSaveStatus(''), 3000);
     } finally {
       setIsSaving(false);
     }
-  };
+  }, [conversation, markSaved]);
 
-  const getEditSummary = () => {
+  // Memoize the summary calculation to prevent re-computing on every render
+  const summary = useMemo(() => {
     if (!conversation) return null;
     const editedCount = conversation.turns.filter(t => t.text !== t.originalText).length;
-    const flaggedCount = conversation.turns.filter(t => t.isFlagged).length;
-    return { editedCount, flaggedCount };
-  };
-
-  const summary = getEditSummary();
+    const annotatedCount = conversation.turns.filter(t => 
+      t.speaker === 'kisaanverse' && t.isFunctionCallWrong
+    ).length;
+    return { editedCount, annotatedCount };
+  }, [conversation]);
 
   return (
     <div className="bg-stone-950 border-t border-stone-700 px-4 py-4">
@@ -64,7 +70,7 @@ const Footer: React.FC = () => {
           {summary && (
             <div className="flex items-center space-x-4 text-xs text-stone-500">
               <span>{summary.editedCount} edited</span>
-              <span>{summary.flaggedCount} flagged</span>
+              <span>{summary.annotatedCount} annotated</span>
             </div>
           )}
         </div>
@@ -96,8 +102,8 @@ const Footer: React.FC = () => {
               </>
             ) : (
               <>
-                <Save className="w-4 h-4" />
-                <Download className="w-4 h-4" />
+                <Save className="w-4 h-4 text-white" />
+                <Download className="w-4 h-4 text-white" />
                 <span className="text-sm font-medium">Save & Download</span>
               </>
             )}
